@@ -1,5 +1,4 @@
 // logic for database connection
-
 const {Sequelize , DataTypes } = require("sequelize") // Here Sequelize is class so class needs to be instantious
 
 // const sequelize = require("sequelize")
@@ -26,7 +25,9 @@ db.products = require("./models/product.model")(sequelize, DataTypes)
 
 // This is migrate code
 sequelize
-    .sync({alter : false}) // alter : true le sab data lai loss garxa. Instead of force, use alter
+    .sync({alter : true}) 
+    // alter: true does not cause data loss — it tries to update tables without deleting data.
+    // force: true does cause data loss — it drops and recreates tables.
     .then(()=>{
         console.log("Migrated")
     })
