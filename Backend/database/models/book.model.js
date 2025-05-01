@@ -11,7 +11,6 @@ const bookModel = (sequelize, DataTypes) =>{
         },
         bookAuthor : {
             type : DataTypes.STRING,
-            defaultValue : "No Author"
         },
         bookGenre : {
             type : DataTypes.STRING,

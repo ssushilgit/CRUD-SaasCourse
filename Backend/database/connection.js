@@ -21,7 +21,7 @@ db.Sequelize = Sequelize // class value
 db.sequelize = sequelize // object value
 
 db.books = require("./models/book.model")(sequelize, DataTypes)
-db.products = require("./models/product.model")(sequelize, DataTypes)
+
 
 // This is migrate code
 sequelize
