@@ -38,4 +38,19 @@ exports.updateBook =  function(req,res){
     })
 }
 
+exports.singleFetchBook = async function(req, res){
+    const id = req.params.id
+    const datas = await books.findByPk(id)
+    // const datass = await books.findAll({
+    //     where : {
+    //         id : id
+    //     }
+    // })
+    res.json({
+        message : "Single book fetched successfully",
+        datas
+        // datass 
+    })
+}
+
 // module.exports = {fetchBooks, addBook, deleteBook, updateBook}

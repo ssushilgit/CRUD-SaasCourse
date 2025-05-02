@@ -1,8 +1,9 @@
-const { fetchBooks, addBook, deleteBook, updateBook } = require("../controllers/bookController")
+const { fetchBooks, addBook, deleteBook, updateBook, singleFetchBook } = require("../controllers/bookController")
 const router =require("express").Router()
 
 router.route("/books").get(fetchBooks).post(addBook)
-router.route("/book/:id").delete(deleteBook).patch(updateBook)
+router.route("/books/:id").delete(deleteBook).patch(updateBook).get(singleFetchBook)
+
 
 // router.get("/books",fetchBooks)
 // router.post("/books",addBook)
