@@ -24,15 +24,39 @@ exports.addBook = async function(req, res){
 }
 
 
-exports.deleteBook = function(req, res){
-    // logic to delete book
+exports.deleteBook = async function(req, res){
+    // get book id
+    // const id = req.body.id // id can be brought from body as well
+    const id = req.params.id // link ma vako id ho req.params.id wala
+
+    // logic to delete book 
+    await books.destroy({
+        where : {
+            id : id // books table ko id : mathi ako id
+        }
+    })
     res.json({
         message : "Book deleted successfully"
     })
 }
 
-exports.updateBook =  function(req,res){
-    // logic to update book
+exports.updateBook = async function(req,res){
+    // kun id ko data update garne
+    const id = req.params.id
+
+    // update garne logic
+    const {bookName, bookPrice, bookAuthor, bookGenre} = req.body
+    await books.update({
+        bookName : bookName, // columnName : valueName
+        bookPrice : bookPrice,
+        bookAuthor : bookAuthor,
+        bookGenre : bookGenre
+    }, {
+        where : {
+            id : id
+        }
+    })
+    // in mongoose, books.findByIdAndUpdate(id, {})
     res.json({
         message : "Book updated successfully"
     })
@@ -40,7 +64,7 @@ exports.updateBook =  function(req,res){
 
 exports.singleFetchBook = async function(req, res){
     const id = req.params.id
-    const datas = await books.findByPk(id)
+    const datas = await books.findByPk(id) // returns object
     // const datass = await books.findAll({
     //     where : {
     //         id : id
