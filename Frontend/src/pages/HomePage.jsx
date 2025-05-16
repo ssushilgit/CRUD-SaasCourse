@@ -1,8 +1,17 @@
+import { useEffect } from "react"
 import Card from "../components/Card"
 import Navbar from "../components/Navbar"
-import SinglePage from "./SinglePage"
+import axios from "axios"
 
 const HomePage = () => {
+    const fetchBook = async () =>{
+        await axios.get("http://localhost:4000/api/books/")
+    }
+
+    useEffect(()=>{
+        fetchBook()
+    }, [])
+
     return (
         <>
             <Navbar />
