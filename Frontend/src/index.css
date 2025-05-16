@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer components{
+  .box{
+    @apply h-20 w-20 bg-green-500 border-2
+  }
+}
