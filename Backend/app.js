@@ -5,6 +5,12 @@ require("./database/connection")
 app.use(express.json()) 
 const bookRoute = require("./routes/bookRoute")
 
+const cors = require("cors")
+app.use(cors({
+    origin :"http://localhost:5173"
+    // origin :[ "*"] - every link can use this
+}))
+
 // app.get("/books", fetchBooks)
 // app.post("/books", addBook)
 // app.delete("/books/:id", deleteBook)
