@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom"
 
-const Card = () => {
+const Card = ({book}) => {
     return (
         <>
-            <Link to="/single-page">
+            <Link to={`/single-page/${book.id}`}>
                 <div className="flex px-3 py-3">
                     <div className="max-w-sm rounded overflow-hidden shadow-lg">
 
                         <div className="px-6 py-4 space-y-2">
-                            <h2 className="text-2xl font-bold text-indigo-700">The Coldest Sunset</h2>
+                            <h2 className="text-2xl font-bold text-indigo-700">{book.bookName}</h2>
 
                             <p className="text-sm text-gray-500">
-                                <span className="font-medium text-gray-700">Author:</span> John Doe
+                                <span className="font-medium text-gray-700">Author:</span> {book.bookAuthor}
                             </p>
 
                             <p className="text-sm text-gray-500">
-                                <span className="font-medium text-gray-700">Genre:</span> Fiction / Drama
+                                <span className="font-medium text-gray-700">Genre:</span> {book.bookGenre}
                             </p>
 
                             <p className="text-lg font-semibold text-green-600">
-                                $14.99
+                                Rs. {book.bookPrice}
                             </p>
                         </div>
 
