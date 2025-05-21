@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const Card = ({book}) => {
+const Card = ({ book }) => {
     return (
         <>
             <Link to={`/single-page/${book.id}`}>
@@ -24,10 +24,10 @@ const Card = ({book}) => {
                         </div>
 
                         <div className="px-6 py-4 flex gap-3">
-                           
-                                <button className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 text-sm font-semibold text-blue-600 hover:bg-blue-200 transition">
-                                    ✏️ Edit
-                                </button>
+
+                            <button className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 text-sm font-semibold text-blue-600 hover:bg-blue-200 transition">
+                                ✏️ Edit
+                            </button>
                             <button className="inline-flex items-center gap-2 rounded-full bg-red-100 px-4 py-1.5 text-sm font-semibold text-red-600 hover:bg-red-200 transition">
                                 🗑️ Delete
                             </button>

@@ -1,38 +1,63 @@
+import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
-import { Link } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import axios from 'axios'
 
 const SinglePage = () => {
+  const navigate = useNavigate()
+  const { id } = useParams() // use to get parameter of the route
+  // console.log(id)
+  const [singleBook, setSingleBook] = useState({})
+
+  const singleFetchBook = async () => {
+    const response = await axios.get(`http://localhost:4000/api/books/${id}`)
+    setSingleBook(response.data.datas)
+  }
+
+  useEffect(() => {
+    singleFetchBook()
+  }, [])
+
+  // console.log(singleBook)
+
+  const deleteBook = async () => {
+    const response = await axios.delete(`http://localhost:4000/api/books/${id}`)
+    if (response.status === 200) {
+      // home page ma navigation gardim
+      navigate("/")
+    } else {
+      alert("Something went wrong")
+    }
+  }
+
+
   return (
     <>
       <Navbar />
       <div className="bg-gray-100 flex items-start justify-center pt-6 pb-10 min-h-[calc(100vh-60px)]">
+
         <div className="max-w-xl w-full bg-white shadow-lg rounded-lg p-6">
-          <h1 className="text-3xl font-bold text-indigo-700">The Coldest Sunset</h1>
+          <h1 className="text-3xl font-bold text-indigo-700"> {singleBook.bookName}</h1>
 
           <div className="text-gray-700 mt-2 space-y-1">
             <p className="text-lg">
-              <span className="font-semibold">Author:</span> John Doe
+              <span className="font-semibold">Author:</span> {singleBook.bookAuthor}
             </p>
             <p className="text-lg">
-              <span className="font-semibold">Genre:</span> Fiction / Drama
+              <span className="font-semibold">Genre:</span> {singleBook.bookGenre}
             </p>
             <p className="text-xl text-green-600 font-bold">
-              $14.99
+              RS {singleBook.bookPrice}
             </p>
           </div>
 
-          <div className="text-gray-600 text-base mt-3">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla!
-              Maiores et perferendis eaque, exercitationem praesentium nihil.
-            </p>
-          </div>
+
 
           <div className="flex gap-4 pt-4">
-            <Link to = "/edit-page">
-            <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">Edit</button>
+            <Link to="/edit-page">
+              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">Edit</button>
             </Link>
-            <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">Delete</button>
+            <button onClick={deleteBook} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">Delete</button>
           </div>
         </div>
       </div>
