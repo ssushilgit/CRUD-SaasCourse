@@ -3,10 +3,33 @@ import Navbar from '../components/Navbar'
 // import Form from '../components/Form'
 
 const CreatePage = () => {
-    const [bookName, setBookName] = useState("")
-    const [bookAuthor, setBookAuthor] = useState("")
-    const [bookPrice, setBookPrice] = useState("")
-    const [bookGenre, setBookGenre] = useState("")
+    
+    // first approach
+    // const [bookName, setBookName] = useState("")
+    // const [bookAuthor, setBookAuthor] = useState("")
+    // const [bookPrice, setBookPrice] = useState("")
+    // const [bookGenre, setBookGenre] = useState("")
+
+    // second approach
+    const [bookDetail, setBookDetail] = useState({
+        bookName : "",
+        bookAuthor : "",
+        bookPrice : "",
+        bookGenre : ""
+    })
+
+    const handleChange =(e)=>{
+        // let value = e.target.value // kun value type vako value ma display garxa
+        // let name = e.target.name// kun input field ma type vako e.target.name ma display garxa
+        let {name, value} = e.target
+
+        setBookDetail({
+            ...bookDetail, // agadi store vako value jastako testai rakhne
+            [name] : value // bookName : React, bookAuthor : Sushil, bookPrice : 999, bookGenre : Programming
+        })
+        console.log( bookDetail)
+    }
+    
 
     return (
         <>
@@ -26,9 +49,9 @@ const CreatePage = () => {
                                 Book Name
                             </label>
                             <input
-                                onChange = {(event)=>setBookName(event.target.value)}
+                                onChange = {handleChange}
                                 type="text"
-                                name="name"
+                                name="bookName"
                                 id="name"
                                 placeholder="Enter book name"
                                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -42,9 +65,9 @@ const CreatePage = () => {
                                 Book Author
                             </label>
                             <input
-                                onChange = {(event)=>setBookAuthor(event.target.value)}
+                                onChange = {handleChange}
                                 type="text"
-                                name="author"
+                                name="bookAuthor"
                                 id="author"
                                 placeholder="Enter book author"
                                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -58,9 +81,9 @@ const CreatePage = () => {
                                 Book Price
                             </label>
                             <input
-                                onChange = {(event)=>setBookPrice(event.target.value)}
+                                onChange = {handleChange}
                                 type="text"
-                                name="price"
+                                name="bookPrice"
                                 id="price"
                                 placeholder="Enter book price"
                                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -74,9 +97,9 @@ const CreatePage = () => {
                                 Book Genre
                             </label>
                             <input
-                                onChange = {(event)=>setBookGenre(event.target.value)}
+                               onChange = {handleChange}
                                 type="text"
-                                name="genre"
+                                name="bookGenre"
                                 id="genre"
                                 placeholder="Enter book genre"
                                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
