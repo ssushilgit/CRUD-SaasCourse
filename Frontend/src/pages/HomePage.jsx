@@ -14,7 +14,7 @@ const HomePage = () => {
         fetchBook()
     }, [])
 
-    console.log(books)
+    // console.log(books)
 
     return (
         <>

@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 // import Form from '../components/Form'
 
+
 const CreatePage = () => {
-    
+    const navigate = useNavigate()
+
     // first approach
     // const [bookName, setBookName] = useState("")
     // const [bookAuthor, setBookAuthor] = useState("")
@@ -12,24 +16,39 @@ const CreatePage = () => {
 
     // second approach
     const [bookDetail, setBookDetail] = useState({
-        bookName : "",
-        bookAuthor : "",
-        bookPrice : "",
-        bookGenre : ""
+        bookName: "",
+        bookAuthor: "",
+        bookPrice: "",
+        bookGenre: ""
     })
 
-    const handleChange =(e)=>{
+    const handleChange = (e) => {
         // let value = e.target.value // kun value type vako value ma display garxa
         // let name = e.target.name// kun input field ma type vako e.target.name ma display garxa
-        let {name, value} = e.target
+        let { name, value } = e.target
 
         setBookDetail({
             ...bookDetail, // agadi store vako value jastako testai rakhne
-            [name] : value // bookName : React, bookAuthor : Sushil, bookPrice : 999, bookGenre : Programming
+            [name]: value // bookName : React, bookAuthor : Sushil, bookPrice : 999, bookGenre : Programming
         })
-        console.log( bookDetail)
+        // console.log(bookDetail)
     }
-    
+
+    const submitData = async (e) => {
+        e.preventDefault();
+        // console.log("Submitted data")
+        // mathi state ma vako data lai api ma pass garne -> post method
+        // postt garda duita pathauna paryo , pathaune data ko format always object hunu parxa, jun at the end axios le json ma convert garera pathaidinx
+        const response = await axios.post("http://localhost:4000/api/books/", bookDetail) // ka pathaune ra k pathaune compulsary huna paryo
+        if (response.status === 200) {
+
+            alert("Book added successfully")
+            navigate("/")
+        }
+        else {
+            alert("Book not added")
+        }
+    }
 
     return (
         <>
@@ -37,7 +56,7 @@ const CreatePage = () => {
             {/* <Form bookName = "Enter Book Name " bookAuthor = "Enter Book Author " bookPrice = "Enter Book Price" bookGenre = "Enter Book Genre" /> */}
             <div className="flex items-center justify-center p-12">
                 <div className="mx-auto w-full max-w-[550px] bg-white">
-                    <form>
+                    <form onSubmit={submitData}>
                         <h1 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                             Enter book details
                         </h1>
@@ -49,7 +68,7 @@ const CreatePage = () => {
                                 Book Name
                             </label>
                             <input
-                                onChange = {handleChange}
+                                onChange={handleChange}
                                 type="text"
                                 name="bookName"
                                 id="name"
@@ -65,7 +84,7 @@ const CreatePage = () => {
                                 Book Author
                             </label>
                             <input
-                                onChange = {handleChange}
+                                onChange={handleChange}
                                 type="text"
                                 name="bookAuthor"
                                 id="author"
@@ -81,7 +100,7 @@ const CreatePage = () => {
                                 Book Price
                             </label>
                             <input
-                                onChange = {handleChange}
+                                onChange={handleChange}
                                 type="text"
                                 name="bookPrice"
                                 id="price"
@@ -97,7 +116,7 @@ const CreatePage = () => {
                                 Book Genre
                             </label>
                             <input
-                               onChange = {handleChange}
+                                onChange={handleChange}
                                 type="text"
                                 name="bookGenre"
                                 id="genre"
