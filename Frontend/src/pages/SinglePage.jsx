@@ -17,8 +17,15 @@ const SinglePage = () => {
   useEffect(() => {
     singleFetchBook()
   }, [])
+  // console.log(book)
 
-  // console.log(singleBook)
+  const handleChange = (e) =>{
+    let {name, value} = e.target 
+    setBook({
+      ...data,
+      [name] : value
+    })
+  }
 
   const deleteBook = async () => {
     const response = await axios.delete(`http://localhost:4000/api/books/${id}`)
@@ -54,9 +61,9 @@ const SinglePage = () => {
 
 
           <div className="flex gap-4 pt-4">
-            
+            <Link to={`/edit-page/${book.id}`}>
               <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">Edit</button>
-            
+            </Link>
             <button onClick={deleteBook} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">Delete</button>
           </div>
         </div>
